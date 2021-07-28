@@ -24,7 +24,7 @@ from django.contrib.messages import constants as messages
 SECRET_KEY = 'django-insecure-s+-uozt8o717w&@nr-l)7g-7zqtf)5ik%uz&zcm**bjkgrrvov'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
