@@ -1,0 +1,37 @@
+
+{% extends 'base.html' %}
+
+{% block tittle %} Add Todo {% endblock tittle %}
+
+{% block body %}
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == "error" %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+{% else %}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+{% endif %}
+  {{ message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+
+<div class = "container my-5">
+<h3 class = "addTodo text-center">Add Todo</h3>
+<form method="POST" action="/addTodo">{% csrf_token %}
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" Required>
+  </div>
+  <div class="form-group">
+    <label for="descr">Description</label>
+    <input type="text" class="form-control" id="descr" name="descr" placeholder="Enter Description" Required>
+  </div>
+  <button type="submit" class="btn btn-primary">Add</button>
+</form>
+</div>
+{% endblock body %}

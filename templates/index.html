@@ -1,0 +1,60 @@
+
+{% extends 'base.html' %} 
+
+{% block tittle %} Todo List {% endblock tittle %} 
+
+{% block body %}
+
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == "error" %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+{% else %}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+{% endif %}
+  {{ message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="container my-5">
+  <h3 class="addTodo text-center mb-4">Todos List</h3>
+  <div class="container px-0 mx-0">
+  <table class="table text-center">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Updated Date</th>
+        <th scope="col">Completion Date</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in todoList %}
+      <tr>
+        <td>
+        <a class="btn btn-outline-success text-decoration-none py-0" role="button" href="doneTodo/{{todo.id}}">
+          {% if todo.isDone %}Mark Not Done{% else %}Mark Done{% endif %}
+        </a>
+        </td>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{todo.title}}</td>
+        <td>{{todo.descr}}</td>
+        <td>{{todo.updateDate}}</td>
+        <td>{% if todo.isDone %}{{todo.doneDate}}{% else %}---{% endif %}</td>
+        <td>
+          <a class="btn btn-primary text-decoration-none py-0" role="button" href="editTodo/{{todo.id}}">Edit</a>
+          <a class="btn btn-danger text-decoration-none py-0" role="button" href="deleteTodo/{{todo.id}}">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock body %}
