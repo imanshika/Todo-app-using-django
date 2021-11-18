@@ -14,6 +14,7 @@ def index(request):
         messages.info(request, "No Todos to display!! You can add todo if you want")
     return render(request, 'index.html', {"todoList": todoList})
 
+
 def search(request):
     user = request.user
     if not request.user.is_authenticated:
@@ -26,6 +27,7 @@ def search(request):
         if(not todoList):
             messages.info(request, "No matching todo found")
     return render(request, 'index.html', {"todoList": todoList})
+
 
 def doneTodo(request, id):
     if not request.user.is_authenticated:
@@ -43,6 +45,7 @@ def doneTodo(request, id):
     todoItem.save()
     return redirect("/")
 
+
 def deleteTodo(request, id):
     if not request.user.is_authenticated:
         return redirect('loginUser')
@@ -50,6 +53,7 @@ def deleteTodo(request, id):
     todo.objects.filter(id=id).delete()
     messages.success(request, 'Todo deleted successfully')
     return redirect('/')
+
 
 def editTodo(request, id):
     if not request.user.is_authenticated:
@@ -62,6 +66,7 @@ def editTodo(request, id):
         todoItem.save()
         messages.success(request, 'Todo Edit successfully')
     return render(request, 'editTodo.html', {"todo": todoItem})
+
 
 def addTodo(request):
     user = request.user
@@ -80,7 +85,6 @@ def loginUser(request):
     if request.user.is_authenticated:
         return redirect('/')
     if request.method == "POST":
-        print("here")
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
