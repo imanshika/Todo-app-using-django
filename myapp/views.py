@@ -129,7 +129,7 @@ def signUp(request):
             user.save()
             messages.success(request, f'Your account has been created ! You are now able to log in')
             return redirect('loginUser')
-    return render(request, 'signUp.html')
+    return render(request, 'SignUp.html')
 
 def deleteAccount(request):
     if request.user.is_authenticated:
